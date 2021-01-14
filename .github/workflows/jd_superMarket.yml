@@ -44,3 +44,4 @@ jobs:
           jdBusinessCircleJump: ${{ secrets.BUSINESS_CIRCLE_JUMP }}
           SUPERMARKET_SHARECODES: ${{ secrets.SUPERMARKET_SHARECODES }}
           jdSuperMarketLottery: ${{ secrets.SUPERMARKET_LOTTERY }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
