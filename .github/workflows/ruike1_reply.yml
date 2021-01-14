@@ -38,3 +38,4 @@ jobs:
         env:
           RUIKE_COOKIE: ${{ secrets.RUIKE_COOKIE }}
           RUIKE_REPLY_MESSAGE: ${{ secrets.RUIKE_REPLY_MESSAGE }}
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
