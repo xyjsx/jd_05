@@ -35,7 +35,6 @@ jobs:
           npm install
       - name: '运行 【京东炸年兽~收集】'
         run: |
-          cd ~/jd_scripts
           node jd_nianCollect.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
