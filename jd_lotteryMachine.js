@@ -1,5 +1,4 @@
 /*
-
 京东抽奖机
 活动入口：京东APP中各种抽奖活动的汇总
 自用
@@ -23,7 +22,7 @@ async function main() {
 }
 function updateShareCodes(url = 'https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js') {
   return new Promise(resolve => {
-    $.get({url}, async (err, resp, data) => {
+    $.get({url, timeout: 10000}, async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -40,7 +39,7 @@ function updateShareCodes(url = 'https://raw.githubusercontent.com/yangtingxiao/
 }
 function updateShareCodesCDN(url = 'https://raw.fastgit.org/yangtingxiao/QuantumultX/master/scripts/jd/jd_lotteryMachine.js') {
   return new Promise(async resolve => {
-    $.get({url}, async (err, resp, data) => {
+    $.get({url, timeout: 10000}, async (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)

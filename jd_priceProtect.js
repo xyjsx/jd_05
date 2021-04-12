@@ -7,7 +7,6 @@
 支持云端cookie使用
 修改自：https://raw.githubusercontent.com/ZCY01/daily_scripts/main/jd/jd_priceProtect.js
 修改自：https://raw.githubusercontent.com/id77/QuantumultX/master/task/jdGuaranteedPrice.js
-
 京东保价页面脚本：https://static.360buyimg.com/siteppStatic/script/priceskus-phone.js
 iOS同时支持使用 NobyDa 与 domplin 脚本的京东 cookie
 活动时间：2021-2-14至2021-3-3
@@ -19,14 +18,11 @@ iOS同时支持使用 NobyDa 与 domplin 脚本的京东 cookie
 [task_local]
 #京东保价
 0 2 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_price.js, tag=京东保价, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
-
 ================Loon==============
 [Script]
 cron "0 2 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_price.js,tag=京东保价
-
 ===============Surge=================
 京东保价 = type=cron,cronexp="0 2 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_price.js
-
 ============小火箭=========
 京东保价 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_price.js, cronexpr="0 2 * * *", timeout=3600, enable=true
  */
@@ -62,7 +58,7 @@ if ($.isNode()) {
     if (cookiesArr[i]) {
       $.cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(
-        $.cookie.match(/pt_pin=(.+?);/) && $.cookie.match(/pt_pin=(.+?);/)[1]
+        $.cookie.match(/pt_pin=([^; ]+)(?=;?)/) && $.cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1]
       );
       $.index = i + 1;
       $.isLogin = false;
