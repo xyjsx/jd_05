@@ -18,19 +18,16 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
-        run: |
-          git clone ${{ secrets.GIT_CLONE_URL }} ~/scripts
+	uses: actions/checkout@v2
       - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
       - name: npm install
         run: |
-          cd ~/scripts
           npm install
       - name: '运行 【京东秒秒币】'
         run: |
-          cd ~/scripts
           node jd_ms.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
