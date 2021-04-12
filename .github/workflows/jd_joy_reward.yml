@@ -18,19 +18,15 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
     steps:
       - name: Checkout
-        run: |
-          git clone ${{ secrets.GIT_CLONE_URL }} ~/scripts
       - name: Use Node.js 10.x
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
       - name: npm install
         run: |
-          cd ~/scripts
           npm install
       - name: '运行 【宠汪汪积分兑换京豆】'
         run: |
-          cd ~/scripts
           node jd_joy_reward.js
         env:
           JD_JOY_REWARD_NOTIFY: ${{ secrets.JD_JOY_REWARD_NOTIFY }}
