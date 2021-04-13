@@ -45,3 +45,4 @@ jobs:
           FRUIT_NOTIFY_CONTROL: ${{ secrets.FRUIT_NOTIFY_CONTROL }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           QYWX_AM: ${{ secrets.QYWX_AM }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
