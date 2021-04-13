@@ -45,3 +45,5 @@ jobs:
           SUPERMARKET_SHARECODES: ${{ secrets.SUPERMARKET_SHARECODES }}
           jdSuperMarketLottery: ${{ secrets.SUPERMARKET_LOTTERY }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          QYWX_AM: ${{ secrets.QYWX_AM }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
