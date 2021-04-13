@@ -49,3 +49,4 @@ jobs:
           PUSH_PLUS_USER: ${{ secrets.PUSH_PLUS_USER }}
           TG_PROXY_HOST: ${{ secrets.TG_PROXY_HOST }}
           TG_PROXY_PORT: ${{ secrets.TG_PROXY_PORT }}
+          QYWX_AM: ${{ secrets.QYWX_AM }}
