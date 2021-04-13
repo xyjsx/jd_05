@@ -42,3 +42,5 @@ jobs:
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
           JD_818_SHAREID_NOTIFY: ${{ secrets.JD_818_SHAREID_NOTIFY }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          QYWX_AM: ${{ secrets.QYWX_AM }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
