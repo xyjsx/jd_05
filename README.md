@@ -148,20 +148,4 @@ pt_key=XXX;pt_pin=XXX;&pt_key=XXX;pt_pin=XXX;&pt_key=XXX;pt_pin=XXX;
 
 - QuantumultX cookie脚本订阅链接: [lxk0301_cookies.conf](https://github.coml499477004/JD-scripts/raw/master/QuantumultX/lxk0301_cookies.conf)
 
-## 赞赏码(开发维护不易,请赏杯茶水费)
 
-<div align=center><img width="250" height="250" src="./icon/thanks.jpg"/></div>
-
-## 特别感谢(排名不分先后)：
-
-* [@NobyDa](https://github.com/NobyDa)
-
-* [@chavyleung](https://github.com/chavyleung)
-
-* [@liuxiaoyucc](https://github.com/liuxiaoyucc)
-
-* [@Zero-S1](https://github.com/Zero-S1)
-
-* [@uniqueque](https://github.com/uniqueque)
-
-* [@nzw9314](https://github.com/nzw9314)
