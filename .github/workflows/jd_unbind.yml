@@ -36,3 +36,5 @@ jobs:
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
+          QYWX_AM: ${{ secrets.QYWX_AM }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
