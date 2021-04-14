@@ -1,4 +1,4 @@
-## 脚本来源[@lxk0301](https://gitee.com/lxk0301)
+* 不允许Fork
 
 ## 特别声明: 
 
