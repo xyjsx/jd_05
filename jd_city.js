@@ -39,7 +39,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let inviteCodes = [
   'ZfgwSFNy3Zl24yPWW5gzmgOyj_-d8ZdLXDWyyEObCGo@VdS7n73kQAuhf8_WW9R_mhQSyJn2NU74ho-_cfK6fA',
   'RtGKzr2tEAKqedfJRdIwghR5wmjVCO7tR5ZRlsogShXL1zUjfw@VdS7n73kQAuhf8_WW9R_mhQSyJn2NU74ho-_cfK6fA',
-  'RtGKzr2tEAKqedfJRdIwghR5wmjVCO7tR5ZRlsogShXL1zUjfw@ZfgwSFNy3Zl24yPWW5gzmgOyj_-d8ZdLXDWyyEObCGo',
+  'RtGKzr2tEAKqedfJRdIwghR5wmjVCO7tR5ZRlsogShXL1zUjfw@ZfgwSFNy3Zl24yPWW5gzmgOyj_-d8ZdLXDWyyEObCGo'
 ]
 !(async () => {
   if (!cookiesArr[0]) {
