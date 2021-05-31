@@ -2,7 +2,7 @@
  * @Author: lxk0301 https://gitee.com/lxk0301
  * @Date: 2020-11-20 11:42:03 
  * @Last Modified by: lxk0301
- * @Last Modified time: 2021-3-25 12:27:14
+ * @Last Modified time: 2021-05-28 17:27:14
  */
 /*
 点点券，可以兑换无门槛红包（1元，5元，10元，100元，部分红包需抢购）
@@ -12,11 +12,14 @@
 [task_local]
 #点点券
 10 0,20 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_necklace.js, tag=点点券, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
 ================Loon==============
 [Script]
 cron "10 0,20 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_necklace.js,tag=点点券
+
 ===============Surge=================
 点点券 = type=cron,cronexp="10 0,20 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_necklace.js
+
 ============小火箭=========
 点点券 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_necklace.js, cronexpr="10 0,20 * * *", timeout=3600, enable=true
  */
@@ -45,6 +48,7 @@ const JD_API_HOST = 'https://api.m.jd.com/api';
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
+  console.log(`\n通知：京东已在领取任务、签到、领取点点券三个添加了log做了校验，暂时无可解决\n`);
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
@@ -80,9 +84,9 @@ async function jd_necklace() {
   try {
     await necklace_homePage();
     await doTask();
+    await sign();
     await necklace_homePage();
     await receiveBubbles();
-    await sign();
     await necklace_homePage();
     // await necklace_exchangeGift($.totalScore);//自动兑换多少钱的无门槛红包，1000代表1元，默认兑换全部点点券
     await showMsg();
@@ -123,12 +127,13 @@ async function doTask() {
 }
 async function receiveBubbles() {
   for (let item of $.bubbles) {
-    console.log(`开始领取点点券\n`);
+    console.log(`\n开始领取点点券`);
     await necklace_chargeScores(item.id)
   }
 }
 async function sign() {
   if ($.signInfo.todayCurrentSceneSignStatus === 1) {
+    console.log(`\n开始每日签到`)
     await necklace_sign();
   } else {
     console.log(`当前${new Date(new Date().getTime() + new Date().getTimezoneOffset()*60*1000 + 8*60*60*1000).toLocaleString()}已签到`)
@@ -148,8 +153,8 @@ async function reportTask(item = {}) {
     }
   }
   //首页浏览XX秒的任务
-  if (item['taskType'] === 3) await doAppTask('3');
-  if (item['taskType'] === 4) await doAppTask('4');
+  if (item['taskType'] === 3) await doAppTask('3', item.id);
+  if (item['taskType'] === 4) await doAppTask('4', item.id);
 }
 //每日签到福利
 function necklace_sign() {
@@ -171,6 +176,8 @@ function necklace_sign() {
                 // $.taskConfigVos = data.data.result.taskConfigVos;
                 // $.exchangeGiftConfigs = data.data.result.exchangeGiftConfigs;
               }
+            } else {
+              console.log(`每日签到失败：${JSON.stringify(data)}\n`);
             }
           }
         }
@@ -236,6 +243,8 @@ function necklace_chargeScores(bubleId) {
                 // $.taskConfigVos = data.data.result.taskConfigVos;
                 // $.exchangeGiftConfigs = data.data.result.exchangeGiftConfigs;
               }
+            } else {
+              console.log(`领取点点券失败：${JSON.stringify(data)}\n`)
             }
           }
         }
@@ -344,7 +353,7 @@ function necklace_homePage() {
   })
 }
 
-async function doAppTask(type = '3') {
+async function doAppTask(type = '3', id) {
   let body = {
     "pageClickKey": "CouponCenter",
     "childActivityUrl": "openapp.jdmobile%3a%2f%2fvirtual%3fparams%3d%7b%5c%22category%5c%22%3a%5c%22jump%5c%22%2c%5c%22des%5c%22%3a%5c%22couponCenter%5c%22%7d",
@@ -363,12 +372,14 @@ async function doAppTask(type = '3') {
     "childActivityUrl": "openapp.jdmobile%3a%2f%2fvirtual%3fparams%3d%7b%5c%22category%5c%22%3a%5c%22jump%5c%22%2c%5c%22des%5c%22%3a%5c%22couponCenter%5c%22%7d",
     "pageClickKey": "CouponCenter",
     "lat": "",
-    "taskId": "necklace_142",
+    "taskId": "necklace_" + id,
     "lng": "",
   }
   if (type === '4') {
+    console.log('需等待30秒')
     await $.wait(15000);
-    body['taskId'] = 'necklace_143';
+  } else {
+    console.log('需等待15秒')
   }
   await $.wait(15500);
   await getCcTaskList('reportCcTask', body, type);
@@ -379,8 +390,8 @@ function getCcTaskList(functionId, body, type = '3') {
     if (functionId === 'getCcTaskList') {
       url = `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&uuid=8888888&client=apple&clientVersion=9.4.1&st=1614320848090&sign=d3259c0c19f6c792883485ae65f8991c&sv=111`
     }
-    if (type === '3' && functionId === 'reportCcTask') url = `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&uuid=8888888&client=apple&clientVersion=9.4.1&st=1615862880029&sign=65a8c7e54009ef2139bfe9fc6acd4390&sv=112`
-    if (type === '4' && functionId === 'reportCcTask') url = `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&uuid=8888888&client=apple&clientVersion=9.4.1&st=1615863447055&sign=d920e1397e0ed2de3c4abd123c523268&sv=122`
+    if (type === '3' && functionId === 'reportCcTask') url = `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&uuid=8888888&client=apple&clientVersion=9.4.1&st=1622194121039&sign=d565c4594b8e05645f1fe9a495ac7a7d&sv=122`
+    if (type === '4' && functionId === 'reportCcTask') url = `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&uuid=8888888&client=apple&clientVersion=9.4.1&st=1622193986049&sign=f5abd9fd7b9b8abaa25b34088f9e8a54&sv=102`
     // if (functionId === 'reportCcTask') {
     //   url = `https://api.m.jd.com/client.action?functionId=${functionId}&body=${escape(JSON.stringify(body))}&uuid=8888888&client=apple&clientVersion=9.4.1&st=1614320901023&sign=26e637ba072ddbcfa44c5273ef928696&sv=111`
     // }

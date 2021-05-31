@@ -1,8 +1,8 @@
 /*
  * @Author: shylocks https://github.com/shylocks
  * @Date: 2021-01-13 22:01:41
- * @Last Modified by:   shylocks
- * @Last Modified time: 2021-01-13 22:11:41
+ * @Last Modified by:   star
+ * @Last Modified time: 2021-05-22 8:55:00
  */
 /*
 京东秒秒币
@@ -15,11 +15,14 @@
 [task_local]
 #京东秒秒币
 10 7 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_ms.js, tag=京东秒秒币, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg, enabled=true
+
 ================Loon==============
 [Script]
 cron "10 7 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_ms.js,tag=京东秒秒币
+
 ===============Surge=================
 京东秒秒币 = type=cron,cronexp="10 7 * * *",wake-system=1,timeout=200,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_ms.js
+
 ============小火箭=========
 京东秒秒币 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_ms.js, cronexpr="10 7 * * *", timeout=200, enable=true
  */
@@ -36,7 +39,7 @@ if ($.isNode()) {
   })
   if (process.env.JD_DEBUG && process.env.JD_DEBUG === 'false') console.log = () => {
   };
-  if(JSON.stringify(process.env).indexOf('GITHUB')>-1) process.exit(0)
+  //if(JSON.stringify(process.env).indexOf('GITHUB')>-1) process.exit(0)
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
@@ -152,6 +155,7 @@ function getTaskList() {
                 if($.risk) break
                 if (vo['completionCnt'] < vo['assignmentTimesLimit']) {
                   if (vo['assignmentType'] === 1) {
+                    if(vo['ext'][vo['ext']['extraType']].length === 0) continue;
                     for (let i = vo['completionCnt']; i < vo['assignmentTimesLimit']; ++i) {
                       console.log(`去做${vo['assignmentName']}任务：${i + 1}/${vo['assignmentTimesLimit']}`)
                       let body = {
