@@ -1,16 +1,16 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: jd_shop
+name: jd_gold_creator
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '00 16 * * *'
+    - cron: '11 17 * 5-12 *'
   watch:
     types: started
   repository_dispatch:
-    types: shop
+    types: gold_creator
 jobs:
   build:
 
@@ -33,17 +33,17 @@ jobs:
       - name: npm install
         run: |
           npm install
-      - name: '运行 【进店领豆脚本】'
+      - name: '运行 【金榜创造营】'
         run: |
-          node jd_shop.js
+          node jd_gold_creator.js
         env:
           JD_COOKIE: ${{ secrets.JD_COOKIE }}
           JD_DEBUG: ${{ secrets.JD_DEBUG }}
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
           BARK_PUSH: ${{ secrets.BARK_PUSH }}
+          BARK_SOUND: ${{ secrets.BARK_SOUND }}
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_USER_ID: ${{ secrets.TG_USER_ID }}
-          BARK_SOUND: ${{ secrets.BARK_SOUND }}
           DD_BOT_TOKEN: ${{ secrets.DD_BOT_TOKEN }}
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
