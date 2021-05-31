@@ -19,8 +19,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repository: danwangshimoluo/JdScripts
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -50,3 +48,4 @@ jobs:
           DD_BOT_SECRET: ${{ secrets.DD_BOT_SECRET }}
           IGOT_PUSH_KEY: ${{ secrets.IGOT_PUSH_KEY }}
           QYWX_AM: ${{ secrets.QYWX_AM }}
+          QYWX_KEY: ${{ secrets.QYWX_KEY }}
